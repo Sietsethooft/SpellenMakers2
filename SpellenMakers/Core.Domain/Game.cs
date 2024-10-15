@@ -2,8 +2,8 @@
 
 public class Game
 {
-    [Key]
-    public required string GameName { get; set; }
+    public int GameId { get; set; }
+    public required string Name { get; set; }
     public required string GameDescription { get; set; }
     public bool Is18Plus { get; set; }
     public required byte[] Picture { get; set; }
