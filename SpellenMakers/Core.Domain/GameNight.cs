@@ -7,6 +7,7 @@ public class GameNight
     public DateTime Date { get; set; }
     public TimeOnly Time { get; set; }
     public bool BringSnacks { get; set; }
+    public bool Is18Plus { get; set; }
 
     public int OrganizerId { get; set; } // navigation property
     public required User Organizer { get; set; } // Foreign Key to User
