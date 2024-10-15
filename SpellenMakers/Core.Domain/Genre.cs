@@ -1,8 +1,8 @@
 ﻿namespace Core.Domain;
 
-public class GenreEnum
+public class Genre
 {
     public int GenreId { get; set; }
-    public required string Genre { get; set; }
+    public required string Name { get; set; }
     public ICollection<Game>? Games { get; set; }
 }
