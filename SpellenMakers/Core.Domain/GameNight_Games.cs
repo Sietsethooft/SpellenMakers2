@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Core.Domain;
+﻿namespace Core.Domain;
 
 public class GameNight_Games
 {
