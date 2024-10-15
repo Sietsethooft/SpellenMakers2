@@ -8,8 +8,11 @@ public class GameNight
     public TimeOnly Time { get; set; }
     public bool BringSnacks { get; set; }
 
+    public int OrganizerId { get; set; } // navigation property
     public required User Organizer { get; set; } // Foreign Key to User
-    public required Address AddressId { get; set; } // Foreign Key to Address
+
+    public int AddressId { get; set; } // navigation property
+    public required Address Address { get; set; } // Foreign Key to Address
 
     public ICollection<Player>? Players { get; set; }
     public ICollection<GameNight_Snack>? Snacks { get; set; }
