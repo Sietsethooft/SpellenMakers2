@@ -1,5 +1,6 @@
 ﻿using Core.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,9 @@ public class SpellenMakersContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        SeedData(modelBuilder);
+        base.OnModelCreating(modelBuilder);
+
         // Configuratie voor GameNight_Games
         modelBuilder.Entity<GameNight_Games>()
             .HasKey(gn => new { gn.GameNightId, gn.GameId });
@@ -119,7 +123,36 @@ public class SpellenMakersContext : DbContext
             .WithMany(ce => ce.Games)
             .HasForeignKey(g => g.CategoryId)
             .OnDelete(DeleteBehavior.NoAction);
+    }
+    private void SeedData(ModelBuilder modelBuilder)
+    {
+        var GenderList = new List<Gender>()
+        {
+            new() {GenderId = 1, Name= "M"},
+            new() {GenderId = 2, Name= "V"},
+            new() {GenderId = 3, Name= "X"}
+        };
 
-        base.OnModelCreating(modelBuilder);
+        var GenreList = new List<Genre>()
+        {
+            new() {GenreId = 1, Name = "Strategie"},
+            new() {GenreId = 2, Name = "Party"},
+            new() {GenreId = 3, Name = "Familie"},
+            new() {GenreId = 4, Name = "Coöperatief"},
+            new() {GenreId = 5, Name = "Detective"},
+        };
+
+        var CategoryList = new List<Category>()
+        {
+            new() {CategoryId = 1, Name = "Bordspel"},
+            new() {CategoryId = 2, Name = "Kaartspel"},
+            new() {CategoryId = 3, Name = "Dobbelspel"},
+            new() {CategoryId = 4, Name = "Partyspel"},
+            new() {CategoryId = 5, Name = "Puzezelspel"},
+        };
+
+        modelBuilder.Entity<Gender>().HasData(GenderList);
+        modelBuilder.Entity<Genre>().HasData(GenreList);
+        modelBuilder.Entity<Category>().HasData(CategoryList);
     }
 }
