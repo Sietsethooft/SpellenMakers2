@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 namespace Infrastructure;
 public class SpellenMakersContext : DbContext
 {
+    public SpellenMakersContext(DbContextOptions<SpellenMakersContext> options)
+            : base(options)
+    {
+    }
+
     public DbSet<User> Users { get; set; }
     public DbSet<Address> Addresses { get; set; }
     public DbSet<City> Cities { get; set; }
@@ -116,10 +121,5 @@ public class SpellenMakersContext : DbContext
             .OnDelete(DeleteBehavior.NoAction);
 
         base.OnModelCreating(modelBuilder);
-    }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=spellenmakers;Trusted_Connection=True;");
     }
 }

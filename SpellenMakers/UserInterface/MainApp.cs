@@ -1,7 +1,12 @@
+using Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<SpellenMakersContext>(option =>
+    option.UseSqlServer(builder.Configuration.GetConnectionString("spellenmakers")));
 
 var app = builder.Build();
 
